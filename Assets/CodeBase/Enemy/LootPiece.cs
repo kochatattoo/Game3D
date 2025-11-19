@@ -30,7 +30,7 @@ namespace CodeBase.Enemy
 
         public void Initialize(Loot loot)
         {
-            _id = $"{gameObject.scene.name}_{Guid.NewGuid().ToString()}";
+            SetId(GenerateId());
             _loot = loot;
         }
 
@@ -43,7 +43,6 @@ namespace CodeBase.Enemy
                 LootObject lootObject = new(_id, transform.position, _loot);
                 progress.WorldData.LootData.LootsOnGround.Dict.Add(_id, lootObject);
             }
-
         }
 
         public void LoadProgress(PlayerProgress progress)
@@ -51,7 +50,6 @@ namespace CodeBase.Enemy
             if (progress.WorldData.LootData.LootsOnGround.Dict.TryGetValue(_id, out LootObject lootPiece))
             {
                 LoadData(lootPiece);
-
                 progress.WorldData.LootData.LootsOnGround.Dict.Remove(_id);
             }
         }
@@ -63,6 +61,11 @@ namespace CodeBase.Enemy
             _id = lootObject.id;
         }
 
+        private string GenerateId()
+        {
+            return $"{gameObject.scene.name}_{Guid.NewGuid().ToString()}";
+        }
+
         private void OnTriggerEnter(Collider other) => 
             PickUp();
 
@@ -72,8 +75,6 @@ namespace CodeBase.Enemy
                 return;
 
             _picked = true;
-
-            _worldData.LootData.LootsOnGround.Dict.Remove(_id);
 
             _gameFactory.ProgressWriters.Remove(this);
             _gameFactory.ProgressReaders.Remove(this);
@@ -106,6 +107,5 @@ namespace CodeBase.Enemy
 
             Destroy(gameObject);
         }
-
     }
 }
