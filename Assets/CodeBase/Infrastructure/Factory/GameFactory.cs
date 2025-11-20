@@ -1,6 +1,4 @@
-﻿using CodeBase.Data;
-using CodeBase.Enemy;
-using CodeBase.Hero;
+﻿using CodeBase.Enemy;
 using CodeBase.Infrastructure.Assetmanagement;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
@@ -97,13 +95,23 @@ namespace CodeBase.Infrastructure
             return lootPiece;
         }
 
+        public void CreateSpawner(Vector3 at, string spawnerId, MonsterTypeID monsterTypeID)
+        {
+            var spawner = InstantiateRegistered(AssetPath.Spawner, at)
+                .GetComponent<SpawnPoint>();
+
+            spawner.Construct(this);
+            spawner.Id = spawnerId;
+            spawner.MonsterTypeID = monsterTypeID;
+        }
+
         public void Cleanup()
         {
             ProgressReaders.Clear();
             ProgressWriters.Clear();
         }
 
-        public void Register(ISavedProgressReader progressReader)
+        private void Register(ISavedProgressReader progressReader)
         {
             if (progressReader is ISavedProgress progressWriter)
             ProgressWriters.Add(progressWriter);
@@ -132,5 +140,6 @@ namespace CodeBase.Infrastructure
                 Register(progressReader);
             }
         }
+
     }
 }
