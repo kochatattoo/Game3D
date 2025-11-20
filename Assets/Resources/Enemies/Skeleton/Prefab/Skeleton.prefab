@@ -3104,6 +3104,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 83337e86c1536984282f73398b605682, type: 2}
+    - target: {fileID: 3918350553329162729, guid: 274c4c35ed05ea14c87492064b3cadfd, type: 3}
+      propertyPath: AttackCooldown
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

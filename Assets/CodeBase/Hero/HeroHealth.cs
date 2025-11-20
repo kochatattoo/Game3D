@@ -48,7 +48,6 @@ namespace CodeBase.Hero
 
         public void TakeDamage(float damage)
         {
-
             if (Current <=0)
                 return;
 

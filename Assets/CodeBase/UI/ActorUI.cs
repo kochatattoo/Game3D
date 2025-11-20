@@ -10,24 +10,15 @@ namespace CodeBase.UI
 
         private IHealth _health;
 
-
-        private void Start()
-        {
-            IHealth health = GetComponent<IHealth>();
-
-            if (health != null)
-                Construct(health);
-        }
-
         private void OnDestroy()
         {
             if (_health != null)
                 _health.HealthChanged -= UpdateHpBar;
         }
 
-        public void Construct(IHealth heroHealth)
+        public void Construct(IHealth health)
         {
-            _health = heroHealth;
+            _health = health;
 
             _health.HealthChanged += UpdateHpBar;
         }
@@ -36,6 +27,5 @@ namespace CodeBase.UI
         {
             HpBar.SetValue(_health.Current, _health.Max);
         }
-
     }
 }

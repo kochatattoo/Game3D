@@ -1,6 +1,8 @@
 ﻿using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Logic;
+using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -17,9 +19,8 @@ namespace CodeBase.Enemy
         public float Cleavage = 0.5f;
         public float EffectiveDistance = 0.5f;
 
-        private IGameFactory _factory;
         private Transform _heroTransform;
-        private Collider[] _hits = new Collider[1];
+        private readonly Collider[] _hits = new Collider[1];
         private int _layerMask;
         private float _attackCooldown;
         private bool _isAttacking;
@@ -53,6 +54,11 @@ namespace CodeBase.Enemy
         {
             _attackCooldown = AttackCooldown;
             _isAttacking = false;
+        }
+
+        public void ResetAttack()
+        {
+            OnAttackEnded();
         }
 
         public void DisableAttack() => 
@@ -90,6 +96,5 @@ namespace CodeBase.Enemy
             Animator.PlayAttack();
             _isAttacking = true;
         }
-
     }
 }

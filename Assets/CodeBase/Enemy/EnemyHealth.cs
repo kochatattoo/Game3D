@@ -8,6 +8,7 @@ namespace CodeBase.Enemy
     public class EnemyHealth : MonoBehaviour, IHealth
     {
         public EnemyAnimator Animator;
+        public Attack Attack;
 
         [SerializeField] private float _current;
         [SerializeField] private float _max;
@@ -24,6 +25,7 @@ namespace CodeBase.Enemy
             Animator.PlayHit();
 
             HealthChanged?.Invoke();
+            Attack.ResetAttack();
         }
     }
 }

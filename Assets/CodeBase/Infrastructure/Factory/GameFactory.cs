@@ -1,5 +1,6 @@
 ﻿using CodeBase.Data;
 using CodeBase.Enemy;
+using CodeBase.Hero;
 using CodeBase.Infrastructure.Assetmanagement;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
@@ -131,6 +132,5 @@ namespace CodeBase.Infrastructure
                 Register(progressReader);
             }
         }
-
     }
 }

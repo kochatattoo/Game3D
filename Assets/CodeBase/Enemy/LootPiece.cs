@@ -3,6 +3,7 @@ using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -34,11 +35,14 @@ namespace CodeBase.Enemy
             _loot = loot;
         }
 
+        private void OnTriggerEnter(Collider other) => 
+            PickUp();
+
         public void SetId(string id) => _id = id;
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            if (!progress.WorldData.LootData.LootsOnGround.Dict.ContainsKey(_id))
+            if (!CheckContainsId(progress))
             {
                 LootObject lootObject = new(_id, transform.position, _loot);
                 progress.WorldData.LootData.LootsOnGround.Dict.Add(_id, lootObject);
@@ -47,11 +51,28 @@ namespace CodeBase.Enemy
 
         public void LoadProgress(PlayerProgress progress)
         {
-            if (progress.WorldData.LootData.LootsOnGround.Dict.TryGetValue(_id, out LootObject lootPiece))
+            _worldData = progress.WorldData;
+
+            if (TryGetLootPiece(progress, out LootObject lootPiece))
             {
                 LoadData(lootPiece);
                 progress.WorldData.LootData.LootsOnGround.Dict.Remove(_id);
             }
+        }
+
+        private bool CheckContainsId(PlayerProgress progress)
+        {
+            return GetLootDataDict(progress).ContainsKey(_id);
+        }
+
+        private bool TryGetLootPiece(PlayerProgress progress, out LootObject lootPiece)
+        {
+            return GetLootDataDict(progress).TryGetValue(_id, out lootPiece);
+        }
+
+        private static Dictionary<string, LootObject> GetLootDataDict(PlayerProgress progress)
+        {
+            return progress.WorldData.LootData.LootsOnGround.Dict;
         }
 
         private void LoadData(LootObject lootObject)
@@ -65,9 +86,6 @@ namespace CodeBase.Enemy
         {
             return $"{gameObject.scene.name}_{Guid.NewGuid().ToString()}";
         }
-
-        private void OnTriggerEnter(Collider other) => 
-            PickUp();
 
         private void PickUp()
         {
@@ -101,6 +119,7 @@ namespace CodeBase.Enemy
             LootText.text = $"{_loot.Value}";
             PickupPopup.SetActive(true);
         }
+
         private IEnumerator StartDestroyTimer()
         {
             yield return new WaitForSeconds(1.5f);
