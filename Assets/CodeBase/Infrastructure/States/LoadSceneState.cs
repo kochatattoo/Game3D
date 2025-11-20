@@ -3,6 +3,8 @@ using CodeBase.CameraLogic;
 using UnityEngine;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.UI;
+using UnityEngine.SceneManagement;
+using CodeBase.Infrastructure.Services.StaticData;
 
 
 namespace CodeBase.Infrastructure
@@ -16,14 +18,18 @@ namespace CodeBase.Infrastructure
         private readonly LoadingCurtain _curtain;
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
+        private readonly IStaticDataService _staticData;
 
-        public LoadSceneState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain curtain, IGameFactory gameFactory, IPersistentProgressService progressService)
+        public LoadSceneState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, 
+            LoadingCurtain curtain, IGameFactory gameFactory, IPersistentProgressService progressService,
+            IStaticDataService staticDataService)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _curtain = curtain;
             _gameFactory = gameFactory;
             _progressService = progressService;
+            _staticData = staticDataService;
         }
 
         public void Enter(string sceneName)
@@ -74,10 +80,11 @@ namespace CodeBase.Infrastructure
 
         private void InitSpawners()
         {
-           foreach (GameObject spawnerObject in GameObject.FindGameObjectsWithTag(EnemySpawnerTag))
+            string sceneKey = SceneManager.GetActiveScene().name;
+            LevelStaticData levelData = _staticData.ForLevel(sceneKey);
+            foreach(EnemySpawnerData spawnerData in levelData.EnemySpawners)
             {
-                var spawner = spawnerObject.GetComponent<EnemySpawner>();
-                _gameFactory.Register(spawner);
+                _gameFactory.CreateSpawner(spawnerData.position, spawnerData.Id, spawnerData.MonsterTypeID);
             }
         }
 

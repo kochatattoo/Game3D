@@ -1,7 +1,5 @@
-﻿using CodeBase.Enemy;
-using CodeBase.Utility;
+﻿using CodeBase.Utility;
 using System;
-using System.Collections.Generic;
 
 namespace CodeBase.Data
 {

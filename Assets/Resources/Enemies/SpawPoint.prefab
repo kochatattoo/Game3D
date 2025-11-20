@@ -9,11 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1129307138273204479}
-  - component: {fileID: 8330277197236786785}
-  - component: {fileID: -7159140528438868034}
+  - component: {fileID: 8688965482351284724}
   m_Layer: 0
-  m_Name: Spawner
-  m_TagString: EnemySpawner
+  m_Name: SpawPoint
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8330277197236786785
+--- !u!114 &8688965482351284724
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,21 +41,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1450325841168412205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7977ffd10a151d7468f144246fd0e663, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b339160a39ac7248ad1fe56abfa3e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterTypeID: 0
-  Slain: 0
---- !u!114 &-7159140528438868034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450325841168412205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f1e2a07d554d4f4a8ca89ba939541a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Id: 
+  _slain: 0

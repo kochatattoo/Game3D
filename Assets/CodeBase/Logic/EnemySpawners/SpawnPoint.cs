@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace CodeBase.Logic
 {
-    public class EnemySpawner : MonoBehaviour, ISavedProgress
+    public class SpawnPoint : MonoBehaviour, ISavedProgress
     {
         public MonsterTypeID MonsterTypeID;
         private string _id;
@@ -18,11 +18,9 @@ namespace CodeBase.Logic
         private EnemyDeath _enemyDeath;
         public bool Slain => _slain;
 
-        private void Awake()
-        {
-            _id = GetComponent<UniqueId>().Id;
-            _factory = AllServices.Container.Single<IGameFactory>();
-        }
+        public string Id { get => _id; set => _id = value; }
+
+        public void Construct(IGameFactory factory) => _factory = factory;
 
         public void LoadProgress(PlayerProgress progress)
         {

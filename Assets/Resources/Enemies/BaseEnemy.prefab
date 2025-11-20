@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 1225821641769676799}
+  Attack: {fileID: 3918350553329162729}
   _current: 4
   _max: 4
 --- !u!114 &5846869859391266426
