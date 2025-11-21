@@ -1,9 +1,9 @@
-﻿using CodeBase.Infrastructure.Services.StaticData;
-using CodeBase.Logic;
+﻿using CodeBase.Logic;
 using UnityEditor;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using CodeBase.StaticData;
 
 namespace CodeBase.Editor
 {

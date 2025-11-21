@@ -106,7 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7634480075778134351}
   - component: {fileID: 3118644384318058852}
-  - component: {fileID: 1026304101463675501}
+  - component: {fileID: 5669838990783913555}
   m_Layer: 0
   m_Name: LootUI
   m_TagString: Untagged
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1026304101463675501
+--- !u!114 &5669838990783913555
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2245805712508827600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74f3a8d404d407a43a99fbeb08e26af5, type: 3}
+  m_Script: {fileID: 11500000, guid: 4588a500ff230584b920c420bc45f038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Counter: {fileID: 2244602742598528082}

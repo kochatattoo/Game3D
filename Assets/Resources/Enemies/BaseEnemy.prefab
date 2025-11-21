@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 3325234155134684671}
   - component: {fileID: 1344677555799641076}
   - component: {fileID: 5846869859391266426}
-  - component: {fileID: 4601518712783314871}
+  - component: {fileID: 9035953830922199519}
   m_Layer: 0
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -208,7 +208,7 @@ MonoBehaviour:
   Animator: {fileID: 1225821641769676799}
   follow: {fileID: 2840158346028395003}
   DeathFx: {fileID: 7226888052703040409, guid: bbd29a2cc6c3f8645a3709d347c5fe11, type: 3}
---- !u!114 &4601518712783314871
+--- !u!114 &9035953830922199519
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1500939411536426}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfd4e77694cd6a14a8afc83fbde68148, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e6275aae656bea488b21fa8dc9ac87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HpBar: {fileID: 7301436776052507294}
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 314405473446266827}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6f1afdf411644648a46db7db042ba34, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f08600cf933bd2469035d9457b19a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &345932816785554541
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1861237132137928260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d6c893ea0ca801429f849641ddaf3d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 646f28b21dcf8134196490dd8ab1d042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ImageCurrent: {fileID: 7876104153221875792}
