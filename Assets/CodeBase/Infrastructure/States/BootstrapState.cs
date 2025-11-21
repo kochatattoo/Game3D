@@ -5,6 +5,8 @@ using UnityEngine;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Infrastructure.Services.StaticData;
+using CodeBase.UI.Services;
+using CodeBase.Infrastructure.Services.Ads;
 
 namespace CodeBase.Infrastructure
 {
@@ -42,24 +44,42 @@ namespace CodeBase.Infrastructure
         private void RegisterServices()
         {
             RegisterStaticData();
-            IRandomService randomService = new UnityRandomService();
 
-            _services.RegisterSingle<IInputService>(InputService());
+            RegisterAdsService();
+
             _services.RegisterSingle<IAssets>(new AssetProvider()); // Тут по курсу что то с AdressableAssets
+            _services.RegisterSingle<IInputService>(InputService());
+            _services.RegisterSingle<IRandomService>(new UnityRandomService());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
-            RegisterGameFactory(randomService);
-            _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
-            _services.RegisterSingle<IReloadService>(new ReloadService(_stateMachine));
 
+            _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssets>(),
+                                                               _services.Single<IStaticDataService>(),
+                                                               _services.Single<IPersistentProgressService>(), 
+                                                               _services.Single<IAdsService>()));
+            _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>()));
+
+            RegisterGameFactory();
+
+            _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>(),
+                                                                           _services.Single<IGameFactory>()));
+            _services.RegisterSingle<IReloadService>(new ReloadService(_stateMachine));
         }
 
-        private void RegisterGameFactory(IRandomService randomService)
+        private void RegisterAdsService()
+        {
+            var adsService = new AdsService();
+            adsService.Initialize();
+            _services.RegisterSingle<IAdsService>(adsService);
+        }
+
+        private void RegisterGameFactory()
         {
             _services.RegisterSingle<IGameFactory>(new GameFactory
                 (_services.Single<IAssets>(), 
                 _services.Single<IStaticDataService>(),
                 _services.Single<IPersistentProgressService>(),
-                randomService));
+                _services.Single<IRandomService>(),
+                _services.Single<IWindowService>()));
         }
 
         private void RegisterStaticData()
