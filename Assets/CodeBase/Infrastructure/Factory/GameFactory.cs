@@ -10,7 +10,9 @@ using CodeBase.UI.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.AI;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using Object = UnityEngine.Object;
 
 namespace CodeBase.Infrastructure
@@ -63,13 +65,16 @@ namespace CodeBase.Infrastructure
         {
             MonsterStaticData monsterData = _staticData.ForMonster(typeId);
 
-            GameObject prefab = await monsterData.PrefabReference
-                .LoadAssetAsync()
+            AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(monsterData.PrefabReference);
+
+            GameObject prefab = await handle
                 .Task;
+
+            Addressables.Release(handle);
 
             GameObject monster = Object.Instantiate(prefab, parent.position, Quaternion.identity, parent);
 
-            var health = monster.GetComponent<EnemyHealth>();
+            IHealth health = monster.GetComponent<EnemyHealth>();
             health.Current = monsterData.Hp;
             health.Max = monsterData.Hp;
 
