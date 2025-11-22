@@ -4,6 +4,7 @@ using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.StaticData;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure
@@ -14,7 +15,7 @@ namespace CodeBase.Infrastructure
         List<ISavedProgress> ProgressWriters { get; }
         GameObject CreateHero(Vector3 at);
         GameObject CreateHud();
-        GameObject CreateMonster(MonsterTypeID monsterTypeID, Transform parent);
+        Task<GameObject> CreateMonster(MonsterTypeID typeId, Transform parent);
         void Cleanup();
         LootPiece CreateLoot();
         LootPiece CreateLoot(string id);

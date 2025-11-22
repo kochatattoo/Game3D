@@ -8,6 +8,7 @@ using CodeBase.StaticData;
 using CodeBase.UI;
 using CodeBase.UI.Services;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 using Object = UnityEngine.Object;
@@ -58,10 +59,15 @@ namespace CodeBase.Infrastructure
             return hud;
         }
 
-        public GameObject CreateMonster(MonsterTypeID typeId, Transform parent)
+        public async Task<GameObject> CreateMonster(MonsterTypeID typeId, Transform parent)
         {
             MonsterStaticData monsterData = _staticData.ForMonster(typeId);
-            GameObject monster = Object.Instantiate(monsterData.Prefab, parent.position, Quaternion.identity, parent);
+
+            GameObject prefab = await monsterData.PrefabReference
+                .LoadAssetAsync()
+                .Task;
+
+            GameObject monster = Object.Instantiate(prefab, parent.position, Quaternion.identity, parent);
 
             var health = monster.GetComponent<EnemyHealth>();
             health.Current = monsterData.Hp;
