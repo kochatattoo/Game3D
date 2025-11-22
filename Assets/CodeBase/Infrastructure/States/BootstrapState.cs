@@ -44,9 +44,9 @@ namespace CodeBase.Infrastructure
         private void RegisterServices()
         {
             RegisterStaticData();
-
             RegisterAdsService();
 
+            _services.RegisterSingle<IGameStateMachine>(_stateMachine);
             _services.RegisterSingle<IAssets>(new AssetProvider()); // Тут по курсу что то с AdressableAssets
             _services.RegisterSingle<IInputService>(InputService());
             _services.RegisterSingle<IRandomService>(new UnityRandomService());
@@ -79,7 +79,8 @@ namespace CodeBase.Infrastructure
                 _services.Single<IStaticDataService>(),
                 _services.Single<IPersistentProgressService>(),
                 _services.Single<IRandomService>(),
-                _services.Single<IWindowService>()));
+                _services.Single<IWindowService>(),
+                _stateMachine));
         }
 
         private void RegisterStaticData()

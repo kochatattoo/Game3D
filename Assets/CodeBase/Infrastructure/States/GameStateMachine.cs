@@ -12,7 +12,7 @@ namespace CodeBase.Infrastructure
     /// <summary>
     /// Класс изменяющий состояние игры
     /// </summary>
-    public class GameStateMachine
+    public class GameStateMachine : IGameStateMachine
     {
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
@@ -23,16 +23,16 @@ namespace CodeBase.Infrastructure
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
                 [typeof(LoadSceneState)] = new LoadSceneState(this, sceneLoader, curtain,
-                                                              services.Single<IGameFactory>(), 
+                                                              services.Single<IGameFactory>(),
                                                               services.Single<IPersistentProgressService>(),
-                                                              services.Single<IStaticDataService>(), 
+                                                              services.Single<IStaticDataService>(),
                                                               services.Single<IUIFactory>()),
-                [typeof(LoadProgressState)] = new LoadProgressState(this, 
-                                                              services.Single<IPersistentProgressService>(), 
+                [typeof(LoadProgressState)] = new LoadProgressState(this,
+                                                              services.Single<IPersistentProgressService>(),
                                                               services.Single<ISaveLoadService>()),
                 [typeof(GameLoopState)] = new GameLoopState(this)
             };
-            
+
         }
 
         /// <summary>
@@ -62,6 +62,6 @@ namespace CodeBase.Infrastructure
 
         private TState GetState<TState>() where TState : class, IExitableState =>
             _states[typeof(TState)] as TState;
-        
+
     }
 }

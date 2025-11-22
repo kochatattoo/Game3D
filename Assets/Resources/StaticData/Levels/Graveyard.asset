@@ -62,3 +62,5 @@ MonoBehaviour:
   - Id: Main_defeff2a-22fa-41a1-b387-a4d2a73f4a66
     MonsterTypeID: 0
     position: {x: 11.15, y: -0.04, z: 12.89}
+  InitialHeroPosition: {x: 0, y: 0.187, z: 11.45}
+  TransferToPosition: {x: 0.27, y: 1, z: 4.7}

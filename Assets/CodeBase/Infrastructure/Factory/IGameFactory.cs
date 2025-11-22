@@ -19,5 +19,7 @@ namespace CodeBase.Infrastructure
         LootPiece CreateLoot();
         LootPiece CreateLoot(string id);
         void CreateSpawner(Vector3 at, string spawnerId, MonsterTypeID monsterTypeID);
+        void CreateTransferToPoint(Vector3 transferToPosition);
+        Camera CreateCameraOnScene();
     }
 }

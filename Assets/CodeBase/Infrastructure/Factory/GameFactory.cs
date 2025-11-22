@@ -21,18 +21,20 @@ namespace CodeBase.Infrastructure
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _progressService;
         private readonly IWindowService _windowService;
+        private readonly IGameStateMachine _gameStateMachine;
 
         private GameObject HeroGameObject { get; set; }
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress> { };
 
-        public GameFactory(IAssets assets, IStaticDataService staticData, IPersistentProgressService progressService, IRandomService randomService, IWindowService windowService)
+        public GameFactory(IAssets assets, IStaticDataService staticData, IPersistentProgressService progressService, IRandomService randomService, IWindowService windowService, IGameStateMachine gameStateMachine)
         {
             _assets = assets;
             _staticData = staticData;
             _randomService = randomService;
             _progressService = progressService;
             _windowService = windowService;
+            _gameStateMachine = gameStateMachine;
         }
 
         public GameObject CreateHero(Vector3 at)
@@ -102,6 +104,13 @@ namespace CodeBase.Infrastructure
 
             return lootPiece;
         }
+        public void CreateTransferToPoint(Vector3 at)
+        {
+            var transferToPoint = InstantiateRegistered(AssetPath.TransferToPoint, at)
+                .GetComponent<LevelTransferTrigger>();
+
+            transferToPoint.Construct(_gameStateMachine);
+        }
 
         public void CreateSpawner(Vector3 at, string spawnerId, MonsterTypeID monsterTypeID)
         {
@@ -111,7 +120,11 @@ namespace CodeBase.Infrastructure
             spawner.Construct(this);
             spawner.Id = spawnerId;
             spawner.MonsterTypeID = monsterTypeID;
+
         }
+
+        public Camera CreateCameraOnScene() =>
+            _assets.Instantiate(AssetPath.Camera).GetComponent<Camera>();
 
         public void Cleanup()
         {
@@ -148,6 +161,6 @@ namespace CodeBase.Infrastructure
                 Register(progressReader);
             }
         }
-
+        
     }
 }
