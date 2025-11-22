@@ -30,7 +30,9 @@ namespace CodeBase.Editor
 
                 levelData.InitialHeroPosition = GameObject.FindGameObjectWithTag(InitialPointTag).transform.position;
 
-                levelData.TransferToPosition = GameObject.FindGameObjectWithTag(TransferToPositionTag).transform.position;
+                var transferToPoint = GameObject.FindGameObjectWithTag(TransferToPositionTag).GetComponent<LevelTransferTrigger>();
+                levelData.LevelTransferData.TransferToPosition = transferToPoint.transform.position;
+                levelData.LevelTransferData.LevelTo = transferToPoint.TransferTo;
             }
 
             EditorUtility.SetDirty(target);

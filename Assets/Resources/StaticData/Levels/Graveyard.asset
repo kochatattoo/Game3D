@@ -14,53 +14,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: Main
   EnemySpawners:
-  - Id: Main_7f293f41-4969-408f-9724-b4601fca6713
-    MonsterTypeID: 5
-    position: {x: 16.29, y: 1.034, z: -6.57}
-  - Id: Main_0cb49aaa-6b1f-46d1-ab74-e23bb351d6ee
-    MonsterTypeID: 5
-    position: {x: -16.25, y: 2.22, z: 21.57}
-  - Id: Main_f08e7045-be44-4d94-9083-1f15a8f0f56c
-    MonsterTypeID: 0
-    position: {x: -1.83, y: 0.29, z: 4.03}
   - Id: Main_41ca7e28-7cfe-4733-a06d-8cbe2f16389b
     MonsterTypeID: 0
     position: {x: -13.28, y: -0.18, z: 13.52}
-  - Id: Main_3cd57229-c36a-4da5-84f5-402dd67d60c1
+  - Id: Main_0cb49aaa-6b1f-46d1-ab74-e23bb351d6ee
     MonsterTypeID: 5
-    position: {x: -16.25, y: 0.96, z: 2.08}
-  - Id: Main_93586ae7-f177-418a-b3dc-ddb541ec5c91
-    MonsterTypeID: 0
-    position: {x: -11.44, y: 0.673, z: -16.669}
+    position: {x: -16.25, y: 2.22, z: 21.57}
   - Id: Main_3071d26b-b84d-4e9d-81ee-91aee0c29dc2
     MonsterTypeID: 5
     position: {x: 17.56, y: 1.43, z: 2.54}
-  - Id: Main_e1169f34-c8cb-4ab4-85ba-9acfbf694a18
-    MonsterTypeID: 0
-    position: {x: -13.628, y: 0.959, z: -18.12}
-  - Id: Main_3f2018b7-6d82-4c89-a8cc-8b451f33e785
-    MonsterTypeID: 0
-    position: {x: -9.93, y: 0.772, z: -17.276}
-  - Id: Main_c7f8f2e8-8131-417d-a497-5849a1485de4
-    MonsterTypeID: 0
-    position: {x: -3.47, y: -0.18, z: 12.89}
-  - Id: Main_dd3faf5d-8ecf-4174-8d79-3756104bb8aa
-    MonsterTypeID: 5
-    position: {x: -17.79, y: 2.056, z: 19.69}
-  - Id: Main_7eec0f60-761a-4e25-9fd3-efc60944edac
-    MonsterTypeID: 10
-    position: {x: -23.99, y: 3.41, z: 2.54}
-  - Id: Main_7f6316e6-dac9-42b0-8cc1-e1c460d17a5a
-    MonsterTypeID: 0
-    position: {x: -16.25, y: 0.988, z: 4.47}
   - Id: Main_8356836b-f1a5-4385-be35-c47e200f6c3c
     MonsterTypeID: 10
     position: {x: 3.08, y: 1.21, z: -19.74}
-  - Id: Main_16e3dce1-57f8-48be-a7aa-2ba15c614692
+  - Id: Main_7f6316e6-dac9-42b0-8cc1-e1c460d17a5a
+    MonsterTypeID: 0
+    position: {x: -16.25, y: 0.988, z: 4.47}
+  - Id: Main_93586ae7-f177-418a-b3dc-ddb541ec5c91
+    MonsterTypeID: 0
+    position: {x: -11.44, y: 0.673, z: -16.669}
+  - Id: Main_3f2018b7-6d82-4c89-a8cc-8b451f33e785
+    MonsterTypeID: 0
+    position: {x: -9.93, y: 0.772, z: -17.276}
+  - Id: Main_dd3faf5d-8ecf-4174-8d79-3756104bb8aa
     MonsterTypeID: 5
-    position: {x: -17.552, y: 2.357, z: 21.022}
+    position: {x: -17.79, y: 2.056, z: 19.69}
+  - Id: Main_f08e7045-be44-4d94-9083-1f15a8f0f56c
+    MonsterTypeID: 0
+    position: {x: -1.83, y: 0.29, z: 4.03}
   - Id: Main_defeff2a-22fa-41a1-b387-a4d2a73f4a66
     MonsterTypeID: 0
     position: {x: 11.15, y: -0.04, z: 12.89}
+  - Id: Main_3cd57229-c36a-4da5-84f5-402dd67d60c1
+    MonsterTypeID: 5
+    position: {x: -16.25, y: 0.96, z: 2.08}
+  - Id: Main_7eec0f60-761a-4e25-9fd3-efc60944edac
+    MonsterTypeID: 10
+    position: {x: -23.99, y: 3.41, z: 2.54}
+  - Id: Main_7f293f41-4969-408f-9724-b4601fca6713
+    MonsterTypeID: 5
+    position: {x: 16.29, y: 1.034, z: -6.57}
+  - Id: Main_16e3dce1-57f8-48be-a7aa-2ba15c614692
+    MonsterTypeID: 5
+    position: {x: -17.552, y: 2.357, z: 21.022}
+  - Id: Main_c7f8f2e8-8131-417d-a497-5849a1485de4
+    MonsterTypeID: 0
+    position: {x: -3.47, y: -0.18, z: 12.89}
+  - Id: Main_e1169f34-c8cb-4ab4-85ba-9acfbf694a18
+    MonsterTypeID: 0
+    position: {x: -13.628, y: 0.959, z: -18.12}
   InitialHeroPosition: {x: 0, y: 0.187, z: 11.45}
-  TransferToPosition: {x: 0.27, y: 1, z: 4.7}
+  LevelTransferData:
+    LevelTo: Dungeon
+    TransferToPosition: {x: 1.781, y: 0.949, z: 2.501}

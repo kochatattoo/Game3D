@@ -9,13 +9,16 @@ namespace CodeBase.Logic
         private const string PlayerTag = "Player";
 
         public string TransferTo;
+
         private IGameStateMachine _stateMachine;
 
         private bool _triggered;
 
-        public void Construct(IGameStateMachine stateMachine) => 
+        public void Construct(IGameStateMachine stateMachine, string levelTo) 
+        {
             _stateMachine = stateMachine;
-
+            TransferTo = levelTo;
+        }
         private void OnTriggerEnter(Collider other)
         {
             if(_triggered) 

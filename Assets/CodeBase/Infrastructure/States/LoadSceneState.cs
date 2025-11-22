@@ -85,7 +85,7 @@ namespace CodeBase.Infrastructure
             _gameFactory.CreateCameraOnScene();
 
         private void InitTransferToPoints(LevelStaticData levelData) =>
-            _gameFactory.CreateTransferToPoint(levelData.TransferToPosition);
+            _gameFactory.CreateTransferToPoint(levelData.LevelTransferData);
 
         private void InitLoots()
         {

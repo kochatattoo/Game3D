@@ -17,5 +17,7 @@ MonoBehaviour:
   - Id: Main_defeff2a-22fa-41a1-b387-a4d2a73f4a66
     MonsterTypeID: 0
     position: {x: -4.6633406, y: 0.06747818, z: 12.611768}
-  InitialHeroPosition: {x: -3.4658332, y: 0.067481995, z: -16.21939}
-  TransferToPosition: {x: -4.619433, y: 0.06747627, z: 15.741481}
+  InitialHeroPosition: {x: -3.4658332, y: 1.05, z: -18.99}
+  LevelTransferData:
+    LevelTo: Main
+    TransferToPosition: {x: 23.975, y: 7.886, z: 25.035}

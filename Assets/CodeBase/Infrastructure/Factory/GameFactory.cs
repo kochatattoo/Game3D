@@ -104,13 +104,11 @@ namespace CodeBase.Infrastructure
 
             return lootPiece;
         }
-        public void CreateTransferToPoint(Vector3 at)
-        {
-            var transferToPoint = InstantiateRegistered(AssetPath.TransferToPoint, at)
-                .GetComponent<LevelTransferTrigger>();
 
-            transferToPoint.Construct(_gameStateMachine);
-        }
+        public void CreateTransferToPoint(LevelTransferData levelTransferData) =>
+            InstantiateRegistered(AssetPath.TransferToPoint, levelTransferData.TransferToPosition)
+                .GetComponent<LevelTransferTrigger>()
+                .Construct(_gameStateMachine, levelTransferData.LevelTo);
 
         public void CreateSpawner(Vector3 at, string spawnerId, MonsterTypeID monsterTypeID)
         {
