@@ -8,8 +8,6 @@ using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.UI.Services;
 using CodeBase.Infrastructure.Services.Ads;
 using CodeBase.Infrastructure.Services.IAP;
-using static UnityEditor.Rendering.FilterWindow;
-using UnityEditor.MPE;
 
 namespace CodeBase.Infrastructure
 {
@@ -60,7 +58,8 @@ namespace CodeBase.Infrastructure
             _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssets>(),
                                                                _services.Single<IStaticDataService>(),
                                                                _services.Single<IPersistentProgressService>(),
-                                                               _services.Single<IAdsService>()));
+                                                               _services.Single<IAdsService>(),
+                                                               _services.Single<IIAPService>()));
             _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>()));
 
             RegisterGameFactory();
