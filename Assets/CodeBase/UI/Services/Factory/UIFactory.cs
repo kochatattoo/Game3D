@@ -4,13 +4,13 @@ using CodeBase.Infrastructure.Services.Ads;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.StaticData.Windows;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace CodeBase.UI.Services
 {
     public class UIFactory : IUIFactory
     {
-        private const string UIRootPath = "UI/UIRoot";
         private readonly IAssets _assets;
         private readonly IStaticDataService _staticData;
         private readonly IPersistentProgressService _progressService;
@@ -36,9 +36,10 @@ namespace CodeBase.UI.Services
             window.Construct(_adsService, _progressService);
         }
 
-        public void CreateUIRoot()
+        public async Task CreateUIRoot()
         {
-           _uiRoot = _assets.Instantiate(UIRootPath).transform;
+            GameObject pref = await _assets.Load<GameObject>(AssetAddress.UIRoot);
+           _uiRoot = Object.Instantiate(pref).transform;
         }
     }
 }

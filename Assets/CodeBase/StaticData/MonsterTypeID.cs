@@ -5,5 +5,6 @@
         Lich,
         Sekeleton = 5,
         Golem = 10,
+        FatDragon = 20,
     }
 }

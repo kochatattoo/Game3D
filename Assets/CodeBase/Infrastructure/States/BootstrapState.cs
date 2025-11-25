@@ -44,17 +44,17 @@ namespace CodeBase.Infrastructure
         private void RegisterServices()
         {
             RegisterStaticData();
-
             RegisterAdsService();
 
-            _services.RegisterSingle<IAssets>(new AssetProvider()); // Тут по курсу что то с AdressableAssets
+            _services.RegisterSingle<IGameStateMachine>(_stateMachine);
+            RegisterAssetProvider();
             _services.RegisterSingle<IInputService>(InputService());
             _services.RegisterSingle<IRandomService>(new UnityRandomService());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
 
             _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssets>(),
                                                                _services.Single<IStaticDataService>(),
-                                                               _services.Single<IPersistentProgressService>(), 
+                                                               _services.Single<IPersistentProgressService>(),
                                                                _services.Single<IAdsService>()));
             _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>()));
 
@@ -63,6 +63,13 @@ namespace CodeBase.Infrastructure
             _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>(),
                                                                            _services.Single<IGameFactory>()));
             _services.RegisterSingle<IReloadService>(new ReloadService(_stateMachine));
+        }
+
+        private void RegisterAssetProvider()
+        {
+            var assetProvider = new AssetProvider();
+            _services.RegisterSingle<IAssets>(assetProvider);
+            assetProvider.Initialize();
         }
 
         private void RegisterAdsService()
@@ -79,7 +86,8 @@ namespace CodeBase.Infrastructure
                 _services.Single<IStaticDataService>(),
                 _services.Single<IPersistentProgressService>(),
                 _services.Single<IRandomService>(),
-                _services.Single<IWindowService>()));
+                _services.Single<IWindowService>(),
+                _stateMachine));
         }
 
         private void RegisterStaticData()

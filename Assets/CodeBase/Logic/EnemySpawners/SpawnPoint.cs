@@ -4,6 +4,7 @@ using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.StaticData;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace CodeBase.Logic
 {
@@ -29,9 +30,9 @@ namespace CodeBase.Logic
                 Spawn();
         }
 
-        private void Spawn()
+        private async void Spawn()
         {
-            GameObject monster = _factory.CreateMonster(MonsterTypeID, transform);
+            GameObject monster = await _factory.CreateMonster(MonsterTypeID, transform);
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay; 
         }
