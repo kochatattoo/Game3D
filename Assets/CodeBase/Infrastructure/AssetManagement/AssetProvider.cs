@@ -43,6 +43,8 @@ namespace CodeBase.Infrastructure.Assetmanagement
         public Task<GameObject> Instantiate(string address, Vector3 at) =>
             Addressables.InstantiateAsync(address, at, Quaternion.identity).Task;
     
+        public Task<GameObject> Instantiate(string address, Transform parent) =>
+            Addressables.InstantiateAsync(address, parent).Task;
 
         public void CleanUp()
         {
@@ -76,5 +78,6 @@ namespace CodeBase.Infrastructure.Assetmanagement
 
             resourceHandles.Add(handle);
         }
+
     }
 }
