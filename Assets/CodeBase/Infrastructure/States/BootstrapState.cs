@@ -7,6 +7,9 @@ using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.UI.Services;
 using CodeBase.Infrastructure.Services.Ads;
+using CodeBase.Infrastructure.Services.IAP;
+using static UnityEditor.Rendering.FilterWindow;
+using UnityEditor.MPE;
 
 namespace CodeBase.Infrastructure
 {
@@ -52,6 +55,8 @@ namespace CodeBase.Infrastructure
             _services.RegisterSingle<IRandomService>(new UnityRandomService());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
 
+            RegisterIAPService(new IAPProvider(), _services.Single<IPersistentProgressService>());
+
             _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssets>(),
                                                                _services.Single<IStaticDataService>(),
                                                                _services.Single<IPersistentProgressService>(),
@@ -77,6 +82,13 @@ namespace CodeBase.Infrastructure
             var adsService = new AdsService();
             adsService.Initialize();
             _services.RegisterSingle<IAdsService>(adsService);
+        }
+
+        private void RegisterIAPService(IAPProvider iapProvider, IPersistentProgressService progressService)
+        {
+            IAPService iapService = new IAPService(iapProvider, progressService);
+            iapService.Initialize();
+            _services.RegisterSingle<IIAPService>(iapService);
         }
 
         private void RegisterGameFactory()

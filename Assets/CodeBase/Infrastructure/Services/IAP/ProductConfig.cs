@@ -1,0 +1,17 @@
+﻿using System;
+using System.ComponentModel;
+using UnityEngine.Purchasing;
+
+namespace CodeBase.Infrastructure.Services.IAP
+{
+    [Serializable]
+    public class ProductConfig
+    {
+        public string Id;
+        public ProductType ProductType;
+
+        public int MaxPurchaseCount;
+        public ItemType ItemType;
+        public int Quantity;
+    } 
+}
