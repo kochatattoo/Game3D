@@ -6,8 +6,8 @@ using CodeBase.UI;
 using UnityEngine.SceneManagement;
 using CodeBase.Infrastructure.Services.StaticData;
 using CodeBase.StaticData;
-using System;
 using CodeBase.UI.Services;
+using System.Threading.Tasks;
 
 
 namespace CodeBase.Infrastructure
@@ -38,24 +38,25 @@ namespace CodeBase.Infrastructure
         public void Enter(string sceneName)
         {
             _curtain.Show();
-            _gameFactory.Cleanup();
+            _gameFactory.CleanUp();
+            _gameFactory.WarmUp();
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
         public void Exit() {}
 
-        private void OnLoaded()
+        private async void OnLoaded()
         {
-            InitUIRoot();
-            InitGameWorld();
+            await InitUIRoot();
+            await InitGameWorld();
             InformProgressReaders();
 
             _curtain.Hide();
             _stateMachine.Enter<GameLoopState>();
         }
 
-        private void InitUIRoot() => 
-            _uiFactory.CreateUIRoot();
+        private async Task InitUIRoot() => 
+           await _uiFactory.CreateUIRoot();
 
         private void InformProgressReaders()
         {
@@ -65,51 +66,50 @@ namespace CodeBase.Infrastructure
             }
         }
 
-        private void InitGameWorld()
+        private async Task InitGameWorld()
         {
             LevelStaticData levelData = LevelStaticData();
 
             // Camera camera = InitCamera();
-            InitSpawners(levelData);
-            InitLoots();
-            InitTransferToPoints(levelData);
+            await InitSpawners(levelData);
+            await InitLoots();
+            await InitTransferToPoints(levelData);
 
-            GameObject hero = InitHero(levelData);
-            InitHud(hero);
+            GameObject hero = await InitHero(levelData);
+            await InitHud(hero);
 
 
             CameraFollow(hero);
         }
 
-        private Camera InitCamera() =>
-            _gameFactory.CreateCameraOnScene();
+        private async Task<Camera> InitCamera() =>
+            await _gameFactory.CreateCameraOnScene();
 
-        private void InitTransferToPoints(LevelStaticData levelData) =>
-            _gameFactory.CreateTransferToPoint(levelData.LevelTransferData);
+        private async Task InitTransferToPoints(LevelStaticData levelData) =>
+           await _gameFactory.CreateTransferToPoint(levelData.LevelTransferData);
 
-        private void InitLoots()
+        private async Task InitLoots()
         {
             foreach (var id in _progressService.Progress.WorldData.LootData.LootsOnGround.Dict)
             {
-                _gameFactory.CreateLoot(id.Key);
+              await _gameFactory.CreateLoot(id.Key);
             }
         }
 
-        private void InitSpawners(LevelStaticData levelData)
+        private async Task InitSpawners(LevelStaticData levelData)
         {
-           
             foreach(EnemySpawnerData spawnerData in levelData.EnemySpawners)
             {
-                _gameFactory.CreateSpawner(spawnerData.position, spawnerData.Id, spawnerData.MonsterTypeID);
+               await _gameFactory.CreateSpawner(spawnerData.position, spawnerData.Id, spawnerData.MonsterTypeID);
             }
         }
 
-        private GameObject InitHero(LevelStaticData levelData) =>
-            _gameFactory.CreateHero(at: levelData.InitialHeroPosition);
+        private async Task<GameObject> InitHero(LevelStaticData levelData) =>
+           await _gameFactory.CreateHero(at: levelData.InitialHeroPosition);
 
-        private void InitHud(GameObject hero)
+        private async Task InitHud(GameObject hero)
         {
-           GameObject hud = _gameFactory.CreateHud();
+           GameObject hud = await _gameFactory.CreateHud();
 
             hud.GetComponentInChildren<ActorUI>()
                 .Construct(hero.GetComponent<IHealth>());
