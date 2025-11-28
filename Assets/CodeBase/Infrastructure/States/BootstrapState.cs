@@ -1,13 +1,13 @@
-﻿using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.Assetmanagement;
-using CodeBase.Services.Input;
-using UnityEngine;
-using CodeBase.Infrastructure.Services.PersistentProgress;
+﻿using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Infrastructure.Services.StaticData;
-using CodeBase.UI.Services;
 using CodeBase.Infrastructure.Services.Ads;
 using CodeBase.Infrastructure.Services.IAP;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Assetmanagement;
+using CodeBase.Services.Input;
+using CodeBase.UI.Services;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {
@@ -36,7 +36,7 @@ namespace CodeBase.Infrastructure
         }
         public void Exit()
         {
-
+            
         }
 
         private void EnterLoadLevel() =>
